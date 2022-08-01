@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:identity_users_manager/providers/local_settings.dart';
 
 import './screens/once_logged_screen.dart';
 import './screens/login_screen.dart';
 import './providers/auth_provider.dart';
 
 void main() {
+  LocalSettings.init();
   runApp(const ProviderScope(child: MyApp()));
 }
 

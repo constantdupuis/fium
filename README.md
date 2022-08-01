@@ -1,16 +1,14 @@
-# indentity_users_manager
+# Flutter Identity Users Manager
 
-A new Flutter project.
+Flutter Identity Users Manager, in short `Fium`.
+Playground Futter project to learn [Flutter](https://flutter.dev), [Riverpod](https://riverpod.dev/fr/), [Hive](https://docs.hivedb.dev/#/) and Web API with ASP.NET from another [project](http://url.to.come).
 
-## Getting Started
+# Generator
 
-This project is a starting point for a Flutter application.
+## Hive Adapter
 
-A few resources to get you started if this is your first Flutter project:
+Run
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```shell
+flutter packages pub run build_runner build
+```
