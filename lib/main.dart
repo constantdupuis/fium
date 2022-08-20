@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:identity_users_manager/providers/local_settings.dart';
+import 'package:identity_users_manager/helpers/colors.dart';
 
-import './screens/once_logged_screen.dart';
-import './screens/login_screen.dart';
-import './providers/auth_provider.dart';
+import 'screens/api_server_form_screen.dart';
+import 'providers/local_settings.dart';
+import 'screens/api_server_list_screen.dart';
 
 void main() {
   LocalSettings.init();
@@ -17,16 +17,17 @@ class MyApp extends ConsumerWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var auth = ref.watch(authProvider);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Fium',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        //primarySwatch: Colors.blue,
+        primarySwatch: createMaterialColor(const Color(0xff73214d)),
       ),
-      home: auth.isAuthentictated
-          ? const OnceLoggedScreen()
-          : const LoginScreen(),
+      home: const ApiServerListScreen(),
+      routes: {
+        ApiServerFormScreen.routeName: (context) => const ApiServerFormScreen(),
+      },
     );
   }
 }

@@ -1,0 +1,1 @@
+enum FormModes { edit, add }

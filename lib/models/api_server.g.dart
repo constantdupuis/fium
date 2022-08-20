@@ -1,22 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'api_serveur.dart';
+part of 'api_server.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class ApiServeurAdapter extends TypeAdapter<ApiServeur> {
+class ApiServerAdapter extends TypeAdapter<ApiServer> {
   @override
   final int typeId = 1;
 
   @override
-  ApiServeur read(BinaryReader reader) {
+  ApiServer read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return ApiServeur()
+    return ApiServer()
       ..name = fields[0] as String
       ..url = fields[1] as String
       ..username = fields[2] as String
@@ -24,7 +24,7 @@ class ApiServeurAdapter extends TypeAdapter<ApiServeur> {
   }
 
   @override
-  void write(BinaryWriter writer, ApiServeur obj) {
+  void write(BinaryWriter writer, ApiServer obj) {
     writer
       ..writeByte(4)
       ..writeByte(0)
@@ -43,7 +43,7 @@ class ApiServeurAdapter extends TypeAdapter<ApiServeur> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ApiServeurAdapter &&
+      other is ApiServerAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

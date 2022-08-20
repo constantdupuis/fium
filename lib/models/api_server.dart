@@ -1,9 +1,9 @@
 import 'package:hive/hive.dart';
 
-part 'api_serveur.g.dart';
+part 'api_server.g.dart';
 
 @HiveType(typeId: 1)
-class ApiServeur extends HiveObject {
+class ApiServer extends HiveObject {
   @HiveField(0)
   String name = '';
   @HiveField(1)
