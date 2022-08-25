@@ -17,7 +17,7 @@ class ApiServerList extends ConsumerWidget {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.connectionState == ConnectionState.done &&
             snapshot.hasError) {
-          return const Center(child: Text('Failedto load api server list'));
+          return const Center(child: Text('Failed to load api server list'));
         }
         final apiServerList = snapshot.data as List<ApiServer>;
         if (apiServerList.isEmpty) {

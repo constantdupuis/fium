@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:identity_users_manager/providers/local_settings.dart';
-import 'package:identity_users_manager/screens/api_server_form_screen.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../providers/local_settings.dart';
+import '../screens/api_server_form_screen.dart';
 import '../models/api_server.dart';
 
 class ApiServerItem extends ConsumerWidget {
@@ -14,9 +15,12 @@ class ApiServerItem extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Card(
       child: ListTile(
-        leading: const Icon(
-          Icons.webhook,
-          size: 36,
+        // leading: const Icon(
+        //   Icons.webhook,
+        //   size: 36,
+        // ),
+        leading: const FaIcon(
+          FontAwesomeIcons.server,
         ),
         title: Text(apiServer.name),
         //subtitle: Text('${apiServer.url} - ${apiServer.username}'),
@@ -49,7 +53,7 @@ class ApiServerItem extends ConsumerWidget {
                 localSettings.removeApiServer(apiServer).then((value) {
                   print('API server removed succefully');
                 }).onError((error, stackTrace) {
-                  print('Failed to reove API $error');
+                  print('Failed to remove API $error');
                 });
               },
             ),
