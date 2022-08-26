@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:identity_users_manager/models/api_server.dart';
 
 import '../configuration/form_mode.dart';
+import '../helpers/confirm_dialog.dart';
+import '../helpers/info_dialog.dart';
 import '../layouts/main_layouts.dart';
 import '../providers/local_settings.dart';
 
@@ -51,30 +53,46 @@ class _ApiServerForeenState extends ConsumerState<ApiServerFormScreen> {
     }
 
     return MainLayout(
-      appBar: _appBar(),
+      appBar: _appBar(context),
       content: _body(),
+      surroundingRation: 0.2,
     );
-
-    // return Scaffold(
-    //   appBar: _appBar(),
-    //   body: _body(),
-    // );
   }
 
-  AppBar _appBar() {
+  AppBar _appBar(BuildContext context) {
     return AppBar(
       title: formMode == FormModes.add
-          ? const Text('Create an API server')
-          : const Text('Update the API server'),
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.save),
-          tooltip: formMode == FormModes.add ? 'Save' : 'Update',
-          onPressed: () {
-            _saveProxy();
-          },
-        ),
-      ],
+          ? const Text('Create API server')
+          : const Text('Edit API server'),
+      // actions: [
+      //   if (formMode == FormModes.edit)
+      //     IconButton(
+      //       icon: const Icon(Icons.delete),
+      //       tooltip: 'Delete',
+      //       onPressed: () async {
+      //         final confirm =
+      //             await showConfirmDialog(context, "Delete API Server ?");
+      //         if (confirm!) {
+      //           final localSettings = ref.read(localSettingsProvider);
+      //           localSettings.removeApiServer(_apiServer).then((value) {
+      //             print('API Server removed');
+      //             Navigator.of(context).pop();
+      //           }).onError((error, stackTrace) async {
+      //             await showInfoDialog(
+      //                 context, "Failed to remove API [$error]");
+      //             print('Failed to remove API $error');
+      //           });
+      //         }
+      //       },
+      //     ),
+      //   IconButton(
+      //     icon: const Icon(Icons.save),
+      //     tooltip: formMode == FormModes.add ? 'Save' : 'Update',
+      //     onPressed: () {
+      //       _saveProxy();
+      //     },
+      //   ),
+      // ],
     );
   }
 
@@ -152,6 +170,50 @@ class _ApiServerForeenState extends ConsumerState<ApiServerFormScreen> {
                 _apiServer.password = newValue ?? _apiServer.password;
               },
             ),
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      _saveProxy();
+                    },
+                    icon: const Icon(Icons.save),
+                    label: Text(formMode == FormModes.add ? 'Save' : 'Update'),
+                  ),
+                  if (formMode == FormModes.edit)
+                    ElevatedButton.icon(
+                      onPressed: () async {
+                        final confirm = await showConfirmDialog(
+                            context, "Delete API Server ?");
+                        if (confirm!) {
+                          final localSettings = ref.read(localSettingsProvider);
+                          localSettings
+                              .removeApiServer(_apiServer)
+                              .then((value) {
+                            print('API Server removed');
+                            Navigator.of(context).pop();
+                          }).onError((error, stackTrace) async {
+                            await showInfoDialog(
+                                context, "Failed to remove API [$error]");
+                            print('Failed to remove API $error');
+                          });
+                        }
+                      },
+                      icon: const Icon(Icons.delete),
+                      label: const Text('Delete'),
+                    ),
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: const Icon(Icons.cancel),
+                    label: const Text('Cancel'),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),

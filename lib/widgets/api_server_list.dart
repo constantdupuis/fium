@@ -12,12 +12,14 @@ class ApiServerList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var localSettings = ref.watch(localSettingsProvider);
     return FutureBuilder(
+      future: localSettings.getApiServerList(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.connectionState == ConnectionState.done &&
             snapshot.hasError) {
-          return const Center(child: Text('Failed to load api server list'));
+          return const Center(
+              child: Text('Failed to load api server list :-('));
         }
         final apiServerList = snapshot.data as List<ApiServer>;
         if (apiServerList.isEmpty) {
@@ -37,7 +39,6 @@ class ApiServerList extends ConsumerWidget {
           ),
         );
       },
-      future: localSettings.getApiServerList(),
     );
   }
 }

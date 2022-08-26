@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:identity_users_manager/helpers/colors.dart';
+import 'package:identity_users_manager/screens/api_server_config_home.dart';
 
 import 'screens/api_server_form_screen.dart';
 import 'providers/local_settings.dart';
@@ -27,6 +28,7 @@ class MyApp extends ConsumerWidget {
       home: const ApiServerListScreen(),
       routes: {
         ApiServerFormScreen.routeName: (context) => const ApiServerFormScreen(),
+        ApiServerConfigHome.routeName: (context) => const ApiServerConfigHome(),
       },
     );
   }

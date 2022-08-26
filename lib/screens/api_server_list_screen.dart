@@ -18,6 +18,10 @@ class ApiServerListScreen extends StatelessWidget {
             Navigator.of(context).pushNamed(ApiServerFormScreen.routeName);
           },
           icon: const Icon(Icons.add),
+          tooltip: 'Add API server config',
+        ),
+        SizedBox(
+          width: 15,
         )
       ],
     );
