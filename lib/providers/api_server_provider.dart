@@ -23,12 +23,16 @@ class ApiServerProvider extends ChangeNotifier {
     final uri = Uri.parse('${apiServer.url}$loginEnpoint');
     final body = json
         .encode({'email': apiServer.username, 'password': apiServer.password});
-
-    var response = await http
-        .post(uri, body: body, headers: {'Content-Type': 'application/json'});
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
-    if (response.statusCode < 400) return true;
-    return false;
+    try {
+      var response = await http
+          .post(uri, body: body, headers: {'Content-Type': 'application/json'});
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
+      if (response.statusCode < 400) return true;
+      return false;
+    } catch (e) {
+      print('Error login to API server : $e');
+      return false;
+    }
   }
 }
