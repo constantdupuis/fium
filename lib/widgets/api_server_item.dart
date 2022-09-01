@@ -32,7 +32,7 @@ class ApiServerItem extends ConsumerWidget {
   }
 
   Widget? _leading() {
-    if (_mediaData.size.width <= verySmallDeviceBreakPoint) {
+    if (_mediaData.size.width <= verySmallDeviceBreakpoint) {
       return null;
     }
     return const FaIcon(
@@ -54,7 +54,7 @@ class ApiServerItem extends ConsumerWidget {
             );
           },
         ),
-        if (_mediaData.size.width > verySmallDeviceBreakPoint)
+        if (_mediaData.size.width > verySmallDeviceBreakpoint)
           IconButton(
             tooltip: 'Delete API server config',
             icon: const Icon(Icons.delete),
@@ -87,7 +87,7 @@ class ApiServerItem extends ConsumerWidget {
   }
 
   Widget? _subtitle(ApiServer apiServer) {
-    if (_mediaData.size.width <= verySmallDeviceBreakPoint) {
+    if (_mediaData.size.width <= verySmallDeviceBreakpoint) {
       return null;
     }
     return Column(

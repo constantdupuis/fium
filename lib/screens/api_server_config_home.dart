@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:identity_users_manager/helpers/future_return.dart';
 import 'package:identity_users_manager/providers/api_server_provider.dart';
 
 import '../layouts/main_layouts.dart';
@@ -92,15 +93,25 @@ class _ApiServerConfigHomeState extends ConsumerState<ApiServerConfigHome> {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Expanded(
-                      child: Center(child: Text('No user yet, add some!')));
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
                 } else if (snapshot.connectionState == ConnectionState.done &&
                     !snapshot.hasError &&
-                    (snapshot.data as bool) == true) {
+                    ((snapshot.data as FutureReturn).value) == true) {
                   return const Expanded(
-                      child: Center(child: Text('Logged in !')));
+                    child: Center(
+                      child: Text('Logged in !'),
+                    ),
+                  );
                 }
-                return const Expanded(
-                    child: Center(child: Text('Error while logging in :-(')));
+                return Expanded(
+                  child: Center(
+                    child: Text(
+                        'Error while logging in : ${(snapshot.data as FutureReturn).message}'),
+                  ),
+                );
               }),
         ],
       ),
